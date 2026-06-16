@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseHead from '../../../components/BaseHead.astro';
-import Footer from '../../../components/Footer.astro';
 import BlogArchive from '../../../components/blog/BlogArchive.astro';
 import BlogTopNav from '../../../components/blog/BlogTopNav.astro';
 import { getSiteConfig } from '../../../data/site';
@@ -70,6 +69,5 @@ const { page, postOffset } = Astro.props;
     <main data-pagefind-body>
       <BlogArchive page={page} postOffset={postOffset} />
     </main>
-    <Footer />
   </body>
 </html>

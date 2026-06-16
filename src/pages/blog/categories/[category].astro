@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseHead from '../../../components/BaseHead.astro';
-import Footer from '../../../components/Footer.astro';
 import BackLink from '../../../components/blog/BackLink.astro';
 import BlogArchive from '../../../components/blog/BlogArchive.astro';
 import BlogTopNav from '../../../components/blog/BlogTopNav.astro';
@@ -68,6 +67,5 @@ const { category, page } = Astro.props;
         headerNote={`${category.count} ${category.count === 1 ? 'article' : 'articles'} in this topic.`}
       />
     </main>
-    <Footer />
   </body>
 </html>
