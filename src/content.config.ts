@@ -120,13 +120,6 @@ const linkSchema = z.object({
   disabled: z.boolean().optional().default(false),
 });
 
-const navigationItemSchema = z.object({
-  icon: z.string(),
-  title: z.string(),
-  subtitle: z.string(),
-  href: z.string(),
-});
-
 const siteConfig = defineCollection({
   loader: file('./src/config/site.toml'),
   schema: z.object({
@@ -138,12 +131,6 @@ const siteConfig = defineCollection({
       repository: z.url(),
       footerNote: z.string(),
     }),
-    vibe: z
-      .object({
-        showTrail: z.boolean().optional().default(true),
-      })
-      .optional()
-      .default({ showTrail: true }),
     theme: z
       .object({
         palette: paletteSchema.optional().default('green-soft'),
@@ -245,45 +232,6 @@ const siteConfig = defineCollection({
       .default({
         postsPerPage: 6,
       }),
-    home: z.object({
-      layout: z.enum(['grid']),
-      quote: z.object({
-        text: z.array(z.string()).min(1),
-        image: z.string(),
-      }),
-      intro: z.object({
-        title: z.string(),
-        name: z.string(),
-        body: z.array(z.string()).min(1),
-        image: z.string(),
-      }),
-      latest: z
-        .object({
-          count: z.number().int().positive().default(1),
-          heatmapWeeks: z.number().int().positive().default(24),
-          showHeatmapLatest: z.boolean().optional().default(true),
-          excludeDraft: z.boolean().optional().default(true),
-          startDate: z.string().optional().default(''),
-          dateArchiveBaseHref: z.string().optional().default(''),
-        })
-        .optional()
-        .default({
-          count: 1,
-          heatmapWeeks: 24,
-          showHeatmapLatest: true,
-          excludeDraft: true,
-          startDate: '',
-          dateArchiveBaseHref: '',
-        }),
-      navigation: z.array(navigationItemSchema),
-      connect: z.array(linkSchema.required({ icon: true })),
-      doing: z.array(
-        z.object({
-          text: z.string(),
-          mark: z.string(),
-        }),
-      ),
-    }),
   }),
 });
 
@@ -299,27 +247,4 @@ const about = defineCollection({
   schema: articleSchema,
 });
 
-const projects = defineCollection({
-  loader: glob({ base: './src/content/projects', pattern: '**/*.{md,mdx}' }),
-  schema: articleSchema,
-});
-
-const vibe = defineCollection({
-  loader: glob({ base: './src/content/vibe', pattern: '**/*.{md,mdx}' }),
-  schema: ({ image }) =>
-    z.object({
-      title: z.string().optional(),
-      date: z.coerce.date(),
-      updatedDate: z.coerce.date().optional(),
-      draft: z.boolean().optional().default(false),
-      type: z.enum(['text', 'photo', 'quote', 'code', 'mixed']).optional().default('text'),
-      mood: z.string().optional(),
-      location: z.string().optional(),
-      images: z.array(contentImageSchema({ image })).optional().default([]),
-      tags: z.array(z.string()).optional().default([]),
-      align: z.enum(['left', 'right', 'center']).optional(),
-      size: z.enum(['sm', 'md', 'lg']).optional().default('md'),
-    }),
-});
-
-export const collections = { about, blog, projects, vibe, siteConfig };
+export const collections = { about, blog, siteConfig };

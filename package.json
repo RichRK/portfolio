@@ -1,5 +1,5 @@
 {
-  "name": "astro-navfolio",
+  "name": "portfolio-rich-king",
   "type": "module",
   "version": "0.2.0",
   "engines": {
@@ -12,7 +12,6 @@
     "preview": "astro preview",
     "astro": "astro",
     "post:new": "bun scripts/new-content.ts blog",
-    "vibe:new": "bun scripts/new-content.ts vibe",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "bun run lint && prettier --check .",

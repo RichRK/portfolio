@@ -1,44 +1,54 @@
 ---
-import IntroCard from '../components/cards/IntroCard.astro';
-import NavigationCard from '../components/cards/NavigationCard.astro';
-import ProfileCard from '../components/cards/ProfileCard.astro';
-import DashboardFlow from '../components/layout/DashboardFlow.astro';
-import BlogHeatmap from '../components/widgets/BlogHeatmap.astro';
-import DoingCard from '../components/widgets/DoingCard.astro';
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import BlogTopNav from '../components/blog/BlogTopNav.astro';
+import BlogArchive from '../components/blog/BlogArchive.astro';
+import GroupNav from '../components/blog/GroupNav.astro';
 import { getSiteConfig } from '../data/site';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import { sortByDateDesc } from '../utils/content-dates';
 
-const { home, profile, site } = await getSiteConfig();
+const { site, theme, blog } = await getSiteConfig();
+const palette = theme.palette;
+const posts = sortByDateDesc(await getCollection('blog', ({ data }) => !data.draft));
+const postsPerPage = blog.postsPerPage;
+const totalPages = Math.max(1, Math.ceil(posts.length / postsPerPage));
+const page = {
+  data: posts.slice(0, postsPerPage),
+  currentPage: 1,
+  lastPage: totalPages,
+  total: posts.length,
+  size: postsPerPage,
+  url: {
+    current: '/',
+    next: totalPages > 1 ? '/blog/page/2/' : undefined,
+  },
+};
 ---
 
-<BaseLayout title={site.pageTitle} description={site.pageDescription}>
-  <div class="publication-bg" aria-hidden="true"></div>
-  <DashboardFlow>
-    <Fragment slot="profile">
-      <ProfileCard profile={profile} />
-    </Fragment>
+<!doctype html>
+<html lang="en" data-palette={palette}>
+  <head>
+    <BaseHead title={site.title} description={site.description} />
+    <style>
+      main {
+        width: min(100%, var(--layout-shell-width));
+        max-width: none;
+        padding: 118px var(--layout-page-gutter) var(--layout-page-bottom);
+      }
 
-    <Fragment slot="hero">
-      <IntroCard intro={home.intro} quote={home.quote} />
-    </Fragment>
-
-    <Fragment slot="activity">
-      <BlogHeatmap
-        weeks={home.latest.heatmapWeeks}
-        showLatest={home.latest.showHeatmapLatest}
-        latestCount={home.latest.count}
-        excludeDraft={home.latest.excludeDraft}
-        startDate={home.latest.startDate || null}
-        dateArchiveBaseHref={home.latest.dateArchiveBaseHref || undefined}
-      />
-    </Fragment>
-
-    <Fragment slot="links">
-      <NavigationCard items={home.navigation} />
-    </Fragment>
-
-    <Fragment slot="recently">
-      <DoingCard items={home.doing} />
-    </Fragment>
-  </DashboardFlow>
-</BaseLayout>
+      @media (max-width: 720px) {
+        main {
+          padding-top: 88px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <BlogTopNav />
+    <main data-pagefind-body>
+      <BlogArchive page={page}>
+        <GroupNav slot="after-header" />
+      </BlogArchive>
+    </main>
+  </body>
+</html>

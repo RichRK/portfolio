@@ -73,8 +73,6 @@ function getResultKind(url: string) {
 
   if (/^\/blog\/[^/]+\/?$/.test(path)) return 'Blog note';
   if (path.startsWith('/blog')) return 'Blog index';
-  if (path.startsWith('/vibe')) return 'Vibe';
-  if (path.startsWith('/projects')) return 'Project';
 
   return 'Page';
 }
