@@ -30,7 +30,7 @@ const seriesCount = getAllSeries(posts).length;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
-    margin: calc(var(--page-header-spacing) * -0.45) 0 34px;
+    margin: 34px 0 0;
   }
 
   a {
@@ -90,7 +90,6 @@ const seriesCount = getAllSeries(posts).length;
   @media (max-width: 640px) {
     .group-nav {
       grid-template-columns: 1fr;
-      margin-top: -10px;
     }
   }
 </style>

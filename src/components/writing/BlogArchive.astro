@@ -127,6 +127,7 @@ function getPageHref(pageNumber: number) {
     }
   </ul>
 </section>
+<slot name="after-posts" />
 {
   hasPagination && (
     <nav class="archive-pagination" aria-label="Blog pagination">
