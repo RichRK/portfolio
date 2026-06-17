@@ -128,7 +128,6 @@ const siteConfig = defineCollection({
       description: z.string(),
       pageTitle: z.string(),
       pageDescription: z.string(),
-      repository: z.url(),
       footerNote: z.string(),
     }),
     theme: z

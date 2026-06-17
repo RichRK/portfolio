@@ -3,7 +3,6 @@ title = "Rich King"
 description = "A personal software engineering portfolio"
 pageTitle = "Rich King | Portfolio"
 pageDescription = "A personal software engineering portfolio"
-repository = "https://github.com/RichRK/portfolio"
 footerNote = ""
 
 [config.theme]
