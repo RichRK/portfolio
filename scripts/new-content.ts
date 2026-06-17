@@ -70,7 +70,7 @@ if (existsSync(targetPath)) {
 mkdirSync(path.dirname(targetPath), { recursive: true });
 writeFileSync(
   targetPath,
-  `${config.frontmatterTemplate(title, isoDate)}\n\n${config.bodyTemplate(title)}\n`,
+  `${config.frontmatterTemplate(title, isoDate)}\n\n${config.bodyTemplate()}\n`,
   'utf8',
 );
 
@@ -115,7 +115,6 @@ function createBlogFrontmatter(title: string, isoDate: string): string {
 title: "${escapeYamlString(title)}"
 description: ""
 date: "${isoDate}"
-draft: true
 showHeroImage: false
 tags: []
 categories: []
@@ -133,7 +132,6 @@ function createVibeFrontmatter(title: string, isoDate: string): string {
 title: "${escapeYamlString(title)}"
 date: "${isoDate}"
 updatedDate: "${isoDate}"
-draft: true
 type: text
 mood: ""
 location: ""
@@ -144,10 +142,8 @@ size: md
 ---`;
 }
 
-function createBlogBody(title: string): string {
-  return `# ${title}
-
-Start writing here.`;
+function createBlogBody(): string {
+  return `Start writing here.`;
 }
 
 function createVibeBody(): string {
