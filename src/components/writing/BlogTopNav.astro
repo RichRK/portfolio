@@ -67,7 +67,6 @@ const shouldShowTocAction = showTocIcon && tocItems.length > 0;
   </button>
 
   <a class="brand" href={withBase('/')} aria-label={`Go to ${site.title} home`}>
-    <span class="brand-mark" aria-hidden="true"></span>
     <span class="brand-title">
       <span>{site.title}</span>
       {brandRouteLabel && <span class="brand-route"> · {brandRouteLabel}</span>}
@@ -365,14 +364,6 @@ const shouldShowTocAction = showTocIcon && tocItems.length > 0;
     font-weight: 700;
   }
 
-  .brand-mark {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background: var(--paper-accent);
-    box-shadow: none;
-  }
-
   .nav-links {
     display: flex;
     justify-content: center;
@@ -475,10 +466,6 @@ const shouldShowTocAction = showTocIcon && tocItems.length > 0;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-    }
-
-    .brand-mark {
-      flex: 0 0 auto;
     }
 
     .nav-actions {
