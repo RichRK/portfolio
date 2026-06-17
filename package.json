@@ -29,8 +29,8 @@
   },
   "devDependencies": {
     "@astrojs/compiler": "^4.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.61.1",
     "@typescript-eslint/parser": "^8.61.1",
-    "eslint-plugin-deprecation": "^3.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.7",
     "pagefind": "^1.5.2",

@@ -1,7 +1,10 @@
-import deprecation from 'eslint-plugin-deprecation';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 
 export default [
+  {
+    ignores: ['.astro/**'],
+  },
   {
     files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
@@ -11,10 +14,10 @@ export default [
       },
     },
     plugins: {
-      deprecation,
+      '@typescript-eslint': tsPlugin,
     },
     rules: {
-      'deprecation/deprecation': 'error',
+      '@typescript-eslint/no-deprecated': 'error',
     },
   },
 ];
