@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
-type ContentType = 'blog' | 'vibe';
+type ContentType = 'writing' | 'vibe';
 type Extension = 'md' | 'mdx';
 
 type ContentTypeConfig = {
@@ -14,9 +14,9 @@ type ContentTypeConfig = {
 };
 
 const CONTENT_TYPES = {
-  blog: {
-    collectionName: 'blog',
-    directory: 'src/content/blog',
+  writing: {
+    collectionName: 'writing',
+    directory: 'src/content/writing',
     defaultExtension: 'md',
     fileName: (slug) => slug,
     bodyTemplate: createBlogBody,
@@ -78,7 +78,7 @@ console.log(`Created new ${config.collectionName} file:`);
 console.log(relativePath);
 
 function isSupportedContentType(value: string | undefined): value is ContentType {
-  return value === 'blog' || value === 'vibe';
+  return value === 'writing' || value === 'vibe';
 }
 
 function normalizeFilename(value: string): string {
@@ -170,6 +170,6 @@ function printUnsupportedContentType(contentType: string | undefined): void {
   console.error(`Unsupported content type: ${contentType ?? ''}
 
 Supported types:
-- blog
+- writing
 - vibe`);
 }

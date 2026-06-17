@@ -1,27 +1,9 @@
-## Quick Start
+## After Making Changes
 
-Install dependencies:
-
-```sh
-bun install
-```
-
-Start the dev server:
+Always run the format script before finishing to avoid lint failures on merge:
 
 ```sh
-bun run dev
-```
-
-Build for production:
-
-```sh
-bun run build
-```
-
-Preview the production build:
-
-```sh
-bun run preview
+bun run format
 ```
 
 ## First Edits
@@ -31,7 +13,7 @@ Most personal content can be replaced without editing components. Start here:
 ```text
 src/config/site.toml        Site title, profile, navigation, homepage modules, comments, search, theme
 src/content/about.mdx       About page
-src/content/blog/           Blog posts and module guides
+src/content/writing/        Writing posts and module guides
 src/content/projects/       Project shelf and project documents
 src/content/vibe/           Short notes and life fragments
 public/images/              Logos, avatars, previews, and static images
@@ -42,39 +24,34 @@ Create content with the built-in scripts:
 ```sh
 bun run post:new my-first-post
 bun run post:new my-interactive-post --mdx
-bun run vibe:new today-cloud
-bun run vibe:new photo-note --mdx
 ```
 
-The command argument is the file slug, not the final title. Blog files are created in `src/content/blog/`; Vibe files are created in `src/content/vibe/` with the existing date-prefixed filename convention.
+The command argument is the file slug, not the final title. Writing files are created in `src/content/writing/`.
 
 ## Routes
 
 ```text
 /                 Personal dashboard homepage
-/blog             Writing archive and module guides
-/blog/[slug]      Blog article pages
-/projects         Project shelf
-/projects/[slug]  Project documentation pages
-/vibe             Short-note timeline
+/writing          Writing archive and module guides
+/writing/[slug]   Writing article pages
 /about            About page
 /rss.xml          RSS feed
 ```
 
 ## Module Guides
 
-Navfolio's module documentation is written as real blog content under `src/content/blog/`, so it is available both in the repository and on the live blog archive.
+Navfolio's module documentation is written as real blog content under `src/content/writing/`, so it is available both in the repository and on the live writing archive.
 
-| Module                        | Local content                                        | Live guide                                                       |
-| ----------------------------- | ---------------------------------------------------- | ---------------------------------------------------------------- |
-| Site config and homepage data | `src/content/blog/toml-site-config-guide.md`         | https://astro.navfolio.site/blog/toml-site-config-guide/         |
-| Theme palettes                | `src/content/blog/theme-palettes.mdx`                | https://astro.navfolio.site/blog/theme-palettes/                 |
-| Full-text search              | `src/content/blog/site-search-module-guide.md`       | https://astro.navfolio.site/blog/site-search-module-guide/       |
-| Comments                      | `src/content/blog/add-comment-system-to-navfolio.md` | https://astro.navfolio.site/blog/add-comment-system-to-navfolio/ |
-| Vibe notes                    | `src/content/blog/vibe-content-guide.mdx`            | https://astro.navfolio.site/blog/vibe-content-guide/             |
-| Categories and series         | `src/content/blog/categories-series-guide.md`        | https://astro.navfolio.site/blog/categories-series-guide/        |
-| Friend link cards             | `src/content/blog/friend-link-card.mdx`              | https://astro.navfolio.site/blog/friend-link-card/               |
-| Markdown rendering            | `src/content/blog/markdown-style-guide.md`           | https://astro.navfolio.site/blog/markdown-style-guide/           |
+| Module                        | Local content                                           | Live guide                                                          |
+| ----------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------- |
+| Site config and homepage data | `src/content/writing/toml-site-config-guide.md`         | https://astro.navfolio.site/writing/toml-site-config-guide/         |
+| Theme palettes                | `src/content/writing/theme-palettes.mdx`                | https://astro.navfolio.site/writing/theme-palettes/                 |
+| Full-text search              | `src/content/writing/site-search-module-guide.md`       | https://astro.navfolio.site/writing/site-search-module-guide/       |
+| Comments                      | `src/content/writing/add-comment-system-to-navfolio.md` | https://astro.navfolio.site/writing/add-comment-system-to-navfolio/ |
+| Vibe notes                    | `src/content/writing/vibe-content-guide.mdx`            | https://astro.navfolio.site/writing/vibe-content-guide/             |
+| Categories and series         | `src/content/writing/categories-series-guide.md`        | https://astro.navfolio.site/writing/categories-series-guide/        |
+| Friend link cards             | `src/content/writing/friend-link-card.mdx`              | https://astro.navfolio.site/writing/friend-link-card/               |
+| Markdown rendering            | `src/content/writing/markdown-style-guide.md`           | https://astro.navfolio.site/writing/markdown-style-guide/           |
 
 ## Site Configuration
 
@@ -86,7 +63,6 @@ Site-level data lives in `src/config/site.toml`:
 - `[config.theme]`: built-in palette selection.
 - `[config.search]`: search entry, shortcut, placeholder, and result count.
 - `[config.comments]`: comment switch and provider.
-- `[config.vibe]`: Vibe timeline behavior.
 - `[config.home]`: homepage quote, introduction, navigation cards, contact links, and current focus list.
 
 The config shape is validated by the Zod schema in `src/content.config.ts`. Missing or invalid fields fail during `bun run build`, which keeps configuration errors easy to locate.
@@ -133,16 +109,6 @@ maxResults = 6
 
 `bun run build` runs Astro first, then writes the Pagefind bundle to `dist/pagefind`. In development, the modal shows an unavailable-index note until a production build has generated the index. Use `bun run preview` after building to test the complete search flow.
 
-## Deployment
-
-The site builds to static files in `dist` and can be deployed to GitHub Pages, Vercel, Netlify, Cloudflare Pages, or any platform that supports Astro static output.
-
-For GitHub Pages project sites, the included workflow can be used directly. `astro.config.mjs` automatically handles the project-page `base` in GitHub Actions, and it can also be overridden manually:
-
-```sh
-SITE_URL=https://example.com SITE_BASE=/astro-navfolio bun run build
-```
-
 ## Project Structure
 
 ```text
@@ -152,7 +118,7 @@ src/
   assets/                 Content images and local fonts
   components/
     article/              Article header components
-    blog/                 Top nav, search, TOC, and related posts
+    writing/              Top nav, search, TOC, and related posts
     cards/                Homepage cards
     comments/             Comment provider components
     layout/               Homepage dashboard layout
@@ -161,7 +127,7 @@ src/
     Icon.astro            Shared icon adapter
   content/
     about.mdx             About page content
-    blog/                 Blog Markdown / MDX and module guides
+    writing/              Writing Markdown / MDX and module guides
     projects/             Project shelf and project documents
     vibe/                 Short notes
   config/site.toml        Site configuration

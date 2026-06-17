@@ -7,7 +7,7 @@ interface Props {
 
 const { name, slug, count } = Astro.props;
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
-const href = `${basePath}/blog/categories/${slug}/`;
+const href = `${basePath}/writing/categories/${slug}/`;
 const articleLabel = count === 1 ? 'article' : 'articles';
 ---
 

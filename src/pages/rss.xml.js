@@ -5,7 +5,7 @@ import { sortByDateDesc } from '../utils/content-dates';
 
 export async function GET(context) {
   const { site } = await getSiteConfig();
-  const posts = sortByDateDesc(await getCollection('blog', ({ data }) => !data.draft));
+  const posts = sortByDateDesc(await getCollection('writing', ({ data }) => !data.draft));
   return rss({
     title: site.title,
     description: site.description,
@@ -13,7 +13,7 @@ export async function GET(context) {
     items: posts.map((post) => ({
       ...post.data,
       pubDate: post.data.date,
-      link: `/blog/${post.id}/`,
+      link: `/writing/${post.id}/`,
     })),
   });
 }

@@ -1,15 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseHead from '../../../components/BaseHead.astro';
-import BackLink from '../../../components/blog/BackLink.astro';
-import BlogTopNav from '../../../components/blog/BlogTopNav.astro';
+import BackLink from '../../../components/writing/BackLink.astro';
+import BlogTopNav from '../../../components/writing/BlogTopNav.astro';
 import FormattedDate from '../../../components/FormattedDate.astro';
-import SeriesProgress from '../../../components/blog/SeriesProgress.astro';
+import SeriesProgress from '../../../components/writing/SeriesProgress.astro';
 import { getSiteConfig } from '../../../data/site';
 import { getAllSeries, getPostsBySeries } from '../../../utils/content-groups';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const posts = await getCollection('writing', ({ data }) => !data.draft);
 
   return getAllSeries(posts).map((series) => ({
     params: { series: series.slug },
@@ -113,7 +113,7 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
   <body>
     <BlogTopNav />
     <main data-pagefind-body>
-      <BackLink href="/blog/series/" label="Back to series" />
+      <BackLink href="/writing/series/" label="Back to series" />
       <header class="archive-hero archive-header-shared page-header-spacing">
         <div class="archive-header-main series-detail-header">
           <div>
@@ -132,7 +132,7 @@ const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
         {
           posts.map((post) => (
             <li class="series-item">
-              <a class="series-link" href={`${basePath}/blog/${post.id}/`}>
+              <a class="series-link" href={`${basePath}/writing/${post.id}/`}>
                 <span>
                   <h2>{post.data.title}</h2>
                   <p class="series-meta">

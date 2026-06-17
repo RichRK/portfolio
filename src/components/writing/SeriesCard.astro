@@ -6,12 +6,12 @@ import SeriesProgress from './SeriesProgress.astro';
 interface Props {
   name: string;
   slug: string;
-  posts: CollectionEntry<'blog'>[];
+  posts: CollectionEntry<'writing'>[];
 }
 
 const { name, slug, posts } = Astro.props;
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
-const href = `${basePath}/blog/series/${slug}/`;
+const href = `${basePath}/writing/series/${slug}/`;
 ---
 
 <article class="series-card">
@@ -27,7 +27,7 @@ const href = `${basePath}/blog/series/${slug}/`;
     {
       posts.slice(0, 4).map((post) => (
         <li>
-          <a href={`${basePath}/blog/${post.id}/`}>
+          <a href={`${basePath}/writing/${post.id}/`}>
             <span>{post.data.title}</span>
             <small>
               <FormattedDate date={post.data.date} />

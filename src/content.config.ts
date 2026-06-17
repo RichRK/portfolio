@@ -234,9 +234,9 @@ const siteConfig = defineCollection({
   }),
 });
 
-const blog = defineCollection({
-  // Load Markdown and MDX files in the `src/content/blog/` directory.
-  loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
+const writing = defineCollection({
+  // Load Markdown and MDX files in the `src/content/writing/` directory.
+  loader: glob({ base: './src/content/writing', pattern: '**/*.{md,mdx}' }),
   // Type-check frontmatter using a schema
   schema: articleSchema,
 });
@@ -246,4 +246,4 @@ const about = defineCollection({
   schema: articleSchema,
 });
 
-export const collections = { about, blog, siteConfig };
+export const collections = { about, writing, siteConfig };

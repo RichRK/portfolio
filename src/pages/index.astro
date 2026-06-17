@@ -1,15 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
-import BlogTopNav from '../components/blog/BlogTopNav.astro';
-import BlogArchive from '../components/blog/BlogArchive.astro';
-import GroupNav from '../components/blog/GroupNav.astro';
+import BlogTopNav from '../components/writing/BlogTopNav.astro';
+import BlogArchive from '../components/writing/BlogArchive.astro';
+import GroupNav from '../components/writing/GroupNav.astro';
 import { getSiteConfig } from '../data/site';
 import { sortByDateDesc } from '../utils/content-dates';
 
 const { site, theme, blog } = await getSiteConfig();
 const palette = theme.palette;
-const posts = sortByDateDesc(await getCollection('blog', ({ data }) => !data.draft));
+const posts = sortByDateDesc(await getCollection('writing', ({ data }) => !data.draft));
 const postsPerPage = blog.postsPerPage;
 const totalPages = Math.max(1, Math.ceil(posts.length / postsPerPage));
 const page = {
@@ -20,7 +20,7 @@ const page = {
   size: postsPerPage,
   url: {
     current: '/',
-    next: totalPages > 1 ? '/blog/page/2/' : undefined,
+    next: totalPages > 1 ? '/writing/page/2/' : undefined,
   },
 };
 ---

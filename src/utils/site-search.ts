@@ -71,8 +71,8 @@ function getResultPath(url: string) {
 function getResultKind(url: string) {
   const path = getResultPath(url);
 
-  if (/^\/blog\/[^/]+\/?$/.test(path)) return 'Blog note';
-  if (path.startsWith('/blog')) return 'Blog index';
+  if (/^\/writing\/[^/]+\/?$/.test(path)) return 'Writing';
+  if (path.startsWith('/writing')) return 'Writing index';
 
   return 'Page';
 }

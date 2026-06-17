@@ -3,20 +3,20 @@ import { getCollection } from 'astro:content';
 import { getAllCategories, getAllSeries } from '../../utils/content-groups';
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
-const posts = await getCollection('blog');
+const posts = await getCollection('writing');
 const categoryCount = getAllCategories(posts).length;
 const seriesCount = getAllSeries(posts).length;
 ---
 
 <nav class="group-nav" aria-label="Blog browsing groups">
-  <a href={`${basePath}/blog/categories/`}>
+  <a href={`${basePath}/writing/categories/`}>
     <span>
       Categories
       <b>{categoryCount}</b>
     </span>
     <small>Browse by topic</small>
   </a>
-  <a href={`${basePath}/blog/series/`}>
+  <a href={`${basePath}/writing/series/`}>
     <span>
       Series
       <b>{seriesCount}</b>

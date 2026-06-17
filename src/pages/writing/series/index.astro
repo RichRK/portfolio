@@ -1,15 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseHead from '../../../components/BaseHead.astro';
-import BackLink from '../../../components/blog/BackLink.astro';
-import BlogTopNav from '../../../components/blog/BlogTopNav.astro';
-import SeriesCard from '../../../components/blog/SeriesCard.astro';
+import BackLink from '../../../components/writing/BackLink.astro';
+import BlogTopNav from '../../../components/writing/BlogTopNav.astro';
+import SeriesCard from '../../../components/writing/SeriesCard.astro';
 import { getSiteConfig } from '../../../data/site';
 import { getAllSeries } from '../../../utils/content-groups';
 
 const { site, theme } = await getSiteConfig();
 const palette = theme.palette;
-const series = getAllSeries(await getCollection('blog', ({ data }) => !data.draft));
+const series = getAllSeries(await getCollection('writing', ({ data }) => !data.draft));
 ---
 
 <!doctype html>
@@ -47,7 +47,7 @@ const series = getAllSeries(await getCollection('blog', ({ data }) => !data.draf
   <body>
     <BlogTopNav />
     <main data-pagefind-body>
-      <BackLink href="/blog/" label="Back to blog" />
+      <BackLink href="/writing/" label="Back to writing" />
       <header class="archive-hero archive-header-shared page-header-spacing">
         <div class="archive-header-main">
           <p class="archive-kicker">Reading paths</p>

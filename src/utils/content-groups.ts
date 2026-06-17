@@ -1,6 +1,6 @@
 import type { CollectionEntry } from 'astro:content';
 
-type BlogPost = CollectionEntry<'blog'>;
+type BlogPost = CollectionEntry<'writing'>;
 
 export interface ContentGroup {
   name: string;

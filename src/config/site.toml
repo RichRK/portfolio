@@ -73,7 +73,7 @@ meta = "Open-source maintainer"
 avatar = "/images/logo.png"
 
 [[config.topNav.links]]
-label = "Blog"
+label = "Writing"
 href = "/"
 
 [[config.topNav.links]]
